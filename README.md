@@ -1,5 +1,8 @@
 # Alice Madness Returns Patcher for Linux / Steam Deck
 
+![image](https://github.com/ConzZah/Alice-Madness-Returns-Patcher_Linux/assets/69615452/0fa935c3-2d14-4e0e-ba36-eb1a1291bfcd)
+
+
 This Patcher will install modified config files for Alice Madness Returns on Linux/Steam Deck.
 
 ### **Currently the script does / accomplishes the following:**
