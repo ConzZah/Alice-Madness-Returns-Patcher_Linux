@@ -2,8 +2,6 @@
 
 ![Logo](https://github.com/ConzZah/Alice-Madness-Returns-Patcher_Linux/assets/69615452/48195970-ab3f-4bec-8ba5-f091552b221b)
 
-**( current version: v2 )**
-
  ## **THIS PATCHER ENABLES YOU TO:**
 
 - Remove the 30fps lock (Game now runs at min 60 to max 120fps)
@@ -12,7 +10,7 @@
 
 - Force-Enable the Weapons of Madness and Dresses Pack DLC
 
-- Optionally Download / Install Alice 1 (from Archive.org), if not installed
+- Optionally Download / Install Alice 1 ( American McGee's Alice ) from Archive.org, if not installed
 
 - Fix Alice 1 not launching in Fullscreen
   
@@ -23,6 +21,7 @@
   </a>
 </p>
 
+**( current version: v2 )**
 
 **Cheers,**
 
