@@ -1,20 +1,21 @@
 # Alice Madness Returns Patcher for Linux / Steam Deck
 
-![image](https://github.com/ConzZah/Alice-Madness-Returns-Patcher_Linux/assets/69615452/0fa935c3-2d14-4e0e-ba36-eb1a1291bfcd)
+![Logo](https://github.com/ConzZah/Alice-Madness-Returns-Patcher_Linux/assets/69615452/48195970-ab3f-4bec-8ba5-f091552b221b)
 
+**( current version: v2 )**
 
-This Patcher will install modified config files for Alice Madness Returns on Linux/Steam Deck.
+ ## **THIS PATCHER ENABLES YOU TO:**
 
-### **Currently the script does / accomplishes the following:**
+- Remove the 30fps lock (Game now runs at min 60 to max 120fps)
 
-- The Game now runs at min 60 to max 120fps (removes 30fps lock)
-- Enables the "Weapons of Madness and Dresses Pack" DLC
-- Removes all intro movies (gets you straight in the game after loading)
+- Remove Intro Movies (gets you straight into the game after loading)
 
+- Force-Enable the Weapons of Madness and Dresses Pack DLC
 
-### **Things i want to add:**
+- Optionally Download / Install Alice 1 (from Archive.org), if not installed
 
-- a full Installer for Alice 1  ( American McGee's Alice )
+- Fix Alice 1 not launching in Fullscreen
+  
 ## Download:
 <p>
   <a href="https://github.com/ConzZah/Alice-Madness-Returns-Patcher_Linux/archive/refs/heads/main.zip">
@@ -22,8 +23,6 @@ This Patcher will install modified config files for Alice Madness Returns on Lin
   </a>
 </p>
 
-
-expect v2 soon.
 
 **Cheers,**
 
