@@ -15,13 +15,17 @@
 - Fix Alice 1 not launching in Fullscreen
   
 ## Download:
+
+**( current version: v3 )**
 <p>
   <a href="https://github.com/ConzZah/Alice-Madness-Returns-Patcher_Linux/archive/refs/heads/main.zip">
     <img alt="Download_Latest" src="https://img.shields.io/badge/download-latest_release-0688CB.svg">
   </a>
 </p>
 
-**( current version: v2 )**
+![Alice_storybook_render](https://github.com/ConzZah/Alice-Madness-Returns-Patcher_Linux/assets/69615452/11c90424-d6d9-498e-a6fe-b5389081c68f)
+ ![Cheshire](https://github.com/ConzZah/Alice-Madness-Returns-Patcher_Linux/assets/69615452/35ffd6ce-115a-4c30-9f3a-0c7fd25d81b6)
+
 
 **Cheers,**
 
