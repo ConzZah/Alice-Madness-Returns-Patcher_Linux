@@ -2,7 +2,7 @@
   #=================================================================
   # Project: ALICE MADNESS RETURNS PATCHER FOR LINUX / STEAM DECK
   # Author:  ConzZah / ©️ 2024
-  # Last Modification: 24.05.2024 / 15:37 [v3.1]
+  # Last Modification: 25.05.2024 / 01:23 [v3.1.1]
   # https://github.com/ConzZah/Alice-Madness-Returns-Patcher_Linux
   #=================================================================
 # patcher_v3
@@ -27,7 +27,7 @@ remove_intro_movies; cd config_files; echo "[ ### EXTRACTING CONFIG FILES ### ]"
 install_config_to_my_documents_config && install_config_to_steamapps_config
 echo ""; echo "[ ### DONE PATCHING ALICE MADNESS RETURNS ### ]"; echo ""
 echo "[ ### CHECKING FOR ALICE 1.. ### ]"
-sleep 3; clear; Check4Alice1
+sleep 2; clear; Check4Alice1
 }
 # remove_intro_movies (literally purges intro movies so you never have to worry about them again.)
 function remove_intro_movies {
@@ -59,7 +59,7 @@ function Check4Alice1 {
 exitmsg="HAVE FUN PLAYING :D"
 Yes="PROCEEDING.."
 cd /home/$USER/.local/share/Steam/steamapps/common/Alice\ Madness\ Returns/
-if [ ! -d Alice1 ]; then echo "[ ~~~ PRESS ANY KEY TO INSTALL ALICE 1 ~~~ ]"; read -n 1 -s; clear; Ask2install_Alice1; fi
+if [ ! -d Alice1 ]; then echo "[ ~~~ ALICE 1 NOT FOUND ~~~ ]"; echo ""; Ask2install_Alice1; fi
 if [ -d Alice1 ]; then 
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo " ALICE 1 FOUND! WOULD YOU LIKE TO APPLY THE FULLSCREEN PATCH?"
@@ -70,30 +70,13 @@ echo "N) NO"
 echo ""; 
 read ask2patch_alice1
 case $ask2patch_alice1 in
-	Y) echo "$yes"; sleep 1; clear; alice1_fullscreen_fix;;
-	y) echo "$yes"; sleep 1; clear; alice1_fullscreen_fix;;
+	Y) echo "$yes"; sleep .5; clear; alice1_fullscreen_fix;;
+	y) echo "$yes"; sleep .5; clear; alice1_fullscreen_fix;;
 	N) echo "$exitmsg"; sleep 2; exit;;
 	n) echo "$exitmsg"; sleep 2; exit;;
 	*) clear; Check4Alice1
 esac
 fi
-}
-# alice1_fullscreen_fix 
-# (applies cfg with option [ seta r_fullscreen "1" ] since the default is 0).
-# NOTE: This also changes the file permissions of config.cfg to read only.
-function alice1_fullscreen_fix {
-mcgeespath="/home/$USER/.steam/steam/steamapps/compatdata/19680/pfx/drive_c/users/steamuser/My Documents/My Games/American McGee's Alice/"
-echo "~~~~~~~~~~~~~~~~~~~~"
-echo "  PATCHING ALICE 1  "
-echo "~~~~~~~~~~~~~~~~~~~~"; echo ""
-cd "$mcgeespath"; chmod 777 config.cfg >/dev/null 2>&1; cd "$wd"; cd config_files
-7z e alice1_config/config.cfg.7z -y -o/home/$USER/.steam/steam/steamapps/compatdata/19680/pfx/drive_c/users/steamuser/My\ Documents/My\ Games/American\ McGee\'s\ Alice >/dev/null 2>&1
-7z e alice1_config/config.cfg.7z -y -o/home/$USER/.local/share/Steam/steamapps/common/Alice\ Madness\ Returns/Alice1/bin/base >/dev/null 2>&1
-cd "$mcgeespath"; chmod 400 config.cfg >/dev/null 2>&1
-echo "DONE PATCHING ALICE 1" 
-echo ""
-echo "$exitmsg"
-sleep 2
 }
 # Ask2install_Alice1 
 # (will ask the user if they want to download & install Alice 1 ONLY IF it hasn't been found in the game directory.)
@@ -109,8 +92,8 @@ echo "N) NO"
 echo ""; 
 read Ask2install_Alice1
 case $Ask2install_Alice1 in
-	Y) echo "$yes"; sleep 1; clear; Alice1_Installer; Check4Alice1;;
-	y) echo "$yes"; sleep 1; clear; Alice1_Installer; Check4Alice1;;
+	Y) echo "$yes"; sleep .5; clear; Alice1_Installer; Check4Alice1;;
+	y) echo "$yes"; sleep .5; clear; Alice1_Installer; Check4Alice1;;
 	N) echo "$exitmsg"; sleep 2; exit;;
 	n) echo "$exitmsg"; sleep 2; exit;;
 	*) clear; Ask2install_Alice1
@@ -128,6 +111,27 @@ echo "[ ### Cleaning up.. ### ]"; rm Alice1.7z; rm Alice1Link.txt; echo ""
 echo "[ ### DONE INSTALLING ALICE 1 ### ]"; echo ""
 echo "$exitmsg"
 sleep 3
+}
+# alice1_fullscreen_fix 
+# (applies cfg with option [ seta r_fullscreen "1" ] since the default is 0).
+# NOTE: This also changes the file permissions of config.cfg to read only.
+function alice1_fullscreen_fix {
+mg_cfg_path="/home/$USER/.steam/steam/steamapps/compatdata/19680/pfx/drive_c/users/steamuser/My Documents/My Games/"
+echo "~~~~~~~~~~~~~~~~~~~~"
+echo "  PATCHING ALICE 1  "
+echo "~~~~~~~~~~~~~~~~~~~~"; echo ""
+cd "$mg_cfg_path"; if [ ! -d American\ McGee\'s\ Alice ]; then mkdir American\ McGee\'s\ Alice; fi
+cd American\ McGee\'s\ Alice
+chmod 777 config.cfg >/dev/null 2>&1; cd "$wd"; cd config_files >/dev/null 2>&1
+echo "[ ### Extracting config.cfg ### ]"
+7z e alice1_config/config.cfg.7z -y -o/home/$USER/.steam/steam/steamapps/compatdata/19680/pfx/drive_c/users/steamuser/My\ Documents/My\ Games/American\ McGee\'s\ Alice >/dev/null 2>&1
+7z e alice1_config/config.cfg.7z -y -o/home/$USER/.local/share/Steam/steamapps/common/Alice\ Madness\ Returns/Alice1/bin/base >/dev/null 2>&1
+echo "[ ### Setting config.cfg to read only ### ]"
+cd "$mg_cfg_path"; cd American\ McGee\'s\ Alice; chmod 400 config.cfg >/dev/null 2>&1
+echo ""; echo "[ ### DONE PATCHING ALICE 1 ### ]"; echo ""
+echo "$exitmsg"; echo ""
+echo "[ ~~~ PRESS ANY KEY TO EXIT ~~~ ]"
+read -n 1 -s; exit
 }
 ###########################
 #  done patching alice 1  #
