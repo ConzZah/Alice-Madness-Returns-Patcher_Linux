@@ -2,12 +2,12 @@
   #=================================================================
   # Project: ALICE MADNESS RETURNS PATCHER FOR LINUX / STEAM DECK
   # Author:  ConzZah / ©️ 2024
-  # Last Modification: 25.05.2024 / 01:23 [v3.1.1]
+  # Last Modification: 10.06.2024 / 22:33 [v3.2]
   # https://github.com/ConzZah/Alice-Madness-Returns-Patcher_Linux
   #=================================================================
-# patcher_v3
+# patcher_v3-2
 wd=$(pwd)
-function patcher_v3 {
+function patcher_v3-2 {
 echo "          .:*======= ConzZah's =======*:."
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 echo " ALICE MADNESS RETURNS PATCHER FOR LINUX / STEAM DECK  "
@@ -49,9 +49,6 @@ echo "[ ### Replacing: DefaultEngine.ini ### ]"
 echo "[ ### Replacing: BaseEngine.ini ### ]"
 7z e steamapps_config/BaseEngine.ini.7z -y -o/home/$USER/.local/share/Steam/steamapps/common/Alice\ Madness\ Returns/Engine/Config >/dev/null 2>&1 
 }
-####################################
-#  done with alice madness returns #
-####################################
 # Check4Alice1
 # (checks game directory for existing install of Alice1. if present, the script will ask you if you also want to patch it.)
 # (if alice 1 hasn't been found, it will ask you if you want to install it.)
@@ -105,7 +102,7 @@ cd /home/$USER/.local/share/Steam/steamapps/common/Alice\ Madness\ Returns/
 echo "~~~~~~~~~~~~~~~~~~~"
 echo " Alice 1 Installer"
 echo "~~~~~~~~~~~~~~~~~~~"; echo ""
-echo "[ ### Downloading Alice1.7z from Archive.org.. ### ]"; echo ""; wget -O Alice1Link.txt https://gist.githubusercontent.com/ConzZah/ffd812046e6a7011b334007b7e8a8037/raw/bd5ae18142ede5b7922af7e474f42cd92734611c/Alice1_Link.txt >/dev/null 2>&1 && wget -q --show-progress -i Alice1Link.txt
+echo "[ ### Downloading Alice1.7z from Archive.org.. ### ]"; echo ""; wget -O Alice1Link.txt https://gist.githubusercontent.com/ConzZah/ffd812046e6a7011b334007b7e8a8037/raw >/dev/null 2>&1 && wget -q --show-progress -i Alice1Link.txt
 echo "[ ### Extracting Alice1.7z into Game Directory.. ### ]"; echo ""; 7z x Alice1.7z -y >/dev/null 2>&1
 echo "[ ### Cleaning up.. ### ]"; rm Alice1.7z; rm Alice1Link.txt; echo ""
 echo "[ ### DONE INSTALLING ALICE 1 ### ]"; echo ""
@@ -133,25 +130,27 @@ echo "$exitmsg"; echo ""
 echo "[ ~~~ PRESS ANY KEY TO EXIT ~~~ ]"
 read -n 1 -s; exit
 }
-###########################
-#  done patching alice 1  #
-###########################
-# pre_launch_checks
+# pre_launch_checks ( dependency checks for wget & 7z )
 function pre_launch_checks {
 missing_dependency="ERROR MISSING DEPENDENCY:"
+prompt="PRESS ANY KEY TO INSTALL"
 command -v wget >/dev/null 2>&1 || { echo "$missing_dependency WGET"; echo ""; 
 echo "( required for downloading alice 1 )"; echo ""; 
-echo "[ ~~~ PRESS ANY KEY TO INSTALL WGET ~~~ ]";
+echo "[ ~~~ $prompt WGET ~~~ ]";
 read -n 1 -s; sudo apt install wget; }
+command -v 7z >/dev/null 2>&1 || { echo "$missing_dependency 7zip"; echo "";
+echo "( required for extracting config files )"; echo ""; 
+echo "[ ~~~ $prompt 7zip ~~~ ]";
+read -n 1 -s; sudo apt install 7zip; }
 # ( FAILSAFE ) If no config_files folder is found, will get config_files.7z as raw text file from gist link. base64 is used to decode, and 7z to extract.
 if [ ! -d config_files ]; then
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo " ERROR: NO CONFIG FILES FOUND. GETTING CONFIG FILES..."
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-wget -O config_files.7z.txt -q https://gist.githubusercontent.com/ConzZah/407ef680a5a9e9c7bb6a48a94227e7b7/raw/c00ec0f19c94961ef0e96aeceb779d772308d6a4/encoded_base64__config_files_v3.1_.7z.txt # <-- DOWNLOADS 
+wget -O config_files.7z.txt -q https://gist.github.com/ConzZah/e138ebb4ac3f8dd60090ed843a86dece/raw # <-- DOWNLOADS 
 base64 -d config_files.7z.txt > config_files.7z # <-- DECODES
 7z x config_files.7z >/dev/null 2>&1 # <-- EXTRACTS
 rm config_files.7z.txt >/dev/null 2>&1; rm config_files.7z >/dev/null 2>&1; sleep 2; clear; fi # <-- CLEANS UP 
 }
-clear; pre_launch_checks; patcher_v3
+clear; pre_launch_checks; patcher_v3-2
 #     ^ ^ ^ ^ ^ ^ LAUNCH ^ ^ ^ ^ ^ ^
