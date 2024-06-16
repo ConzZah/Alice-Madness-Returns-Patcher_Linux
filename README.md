@@ -13,10 +13,10 @@
 - Optionally Download / Install Alice 1 ( American McGee's Alice ) from Archive.org, if not installed
 
 - Fix Alice 1 not launching in Fullscreen
-  
+
 ## Download:
 
-**( current version: v3.1 )**
+**( current version: v3.2-1 )**
 <p>
   <a href="https://github.com/ConzZah/Alice-Madness-Returns-Patcher_Linux/archive/refs/heads/main.zip">
     <img alt="Download_Latest" src="https://img.shields.io/badge/download-latest_release-0688CB.svg">
