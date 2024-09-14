@@ -2,7 +2,7 @@
   #=================================================================
   # Project: ALICE MADNESS RETURNS PATCHER FOR LINUX / STEAM DECK
   # Author:  ConzZah / ©️ 2024
-  # Last Modification: 16.06.2024 / 08:23 [v3.2-1]
+  # Last Modification: 15.09.2024 / 01:40 [v3.3]
   # https://github.com/ConzZah/Alice-Madness-Returns-Patcher_Linux
   #=================================================================
 # main
@@ -29,13 +29,7 @@ echo "[ ### CHECKING FOR ALICE 1.. ### ]"
 sleep 2; clear; Check4Alice1
 }
 # remove_intro_movies (literally purges intro movies so you never have to worry about them again.)
-function remove_intro_movies {
-echo "[ ### REMOVING INTRO MOVIES ### ]"
-cd "$intro_movies_path"
-rm "Intro_EA.bik" >/dev/null 2>&1; rm "Intro_Nvidia.bik" >/dev/null 2>&1
-rm "Intro_SH.bik" >/dev/null 2>&1; rm "TechLogo_Short.bik" >/dev/null 2>&1
-cd "$wd"
-}
+function remove_intro_movies { echo "[ ### REMOVING INTRO MOVIES ### ]"; cd "$intro_movies_path"; rm "Intro_EA.bik" "Intro_Nvidia.bik" "Intro_SH.bik" "TechLogo_Short.bik" >/dev/null 2>&1; cd "$wd" ;}
 # install_config_to_my_documents_config
 function install_config_to_my_documents_config {
 echo "[ ### Replacing: AliceEngine.ini ### ]"
@@ -52,23 +46,15 @@ echo "[ ### Replacing: BaseEngine.ini ### ]"
 # (checks game directory for existing install of Alice1. if present, the script will ask you if you also want to patch it.)
 # (if alice 1 hasn't been found, it will ask you if you want to install it.)
 function Check4Alice1 {
-exitmsg="HAVE FUN PLAYING :D"
-Yes="PROCEEDING.."
-if [ ! -d "$alice1_gamepath/bin/base" ]; then echo "[ ~~~ ALICE 1 NOT FOUND ~~~ ]"; echo ""; Ask2install_Alice1; fi
-if [ -d "$alice1_gamepath/bin/base" ]; then 
+if [ ! -d "$alice1_gamepath/bin/base" ]; then echo "[ ~~~ ALICE 1 NOT FOUND ~~~ ]"; echo ""; Ask2install_Alice1; fi; if [ -d "$alice1_gamepath/bin/base" ]; then 
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo " ALICE 1 FOUND! WOULD YOU LIKE TO APPLY THE FULLSCREEN PATCH?"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo ""
-echo "Y) YES"
-echo "N) NO"
-echo ""; 
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"; echo ""
+echo "Y) YES"; echo "N) NO"; echo ""
 read ask2patch_alice1
 case $ask2patch_alice1 in
-	Y) echo "$yes"; sleep .5; clear; alice1_fullscreen_fix;;
-	y) echo "$yes"; sleep .5; clear; alice1_fullscreen_fix;;
-	N) echo "$exitmsg"; sleep 2; exit;;
-	n) echo "$exitmsg"; sleep 2; exit;;
+	y|Y) clear; alice1_fullscreen_fix;;
+	n|N) echo "$_done"; sleep 2; exit;;
 	*) clear; Check4Alice1
 esac
 fi
@@ -82,15 +68,11 @@ echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 echo "Download Size: ~1GB"
 echo "Server: Archive.org"
 echo "Proceed & Download?"; echo ""
-echo "Y) YES"
-echo "N) NO"
-echo ""; 
+echo "Y) YES"; echo "N) NO"; echo ""; 
 read Ask2install_Alice1
 case $Ask2install_Alice1 in
-	Y) echo "$yes"; sleep .5; clear; Alice1_Installer; Check4Alice1;;
-	y) echo "$yes"; sleep .5; clear; Alice1_Installer; Check4Alice1;;
-	N) echo "$exitmsg"; sleep 2; exit;;
-	n) echo "$exitmsg"; sleep 2; exit;;
+	y|Y) echo "$yes"; sleep .5; clear; Alice1_Installer; Check4Alice1;;
+	n|N) echo "$_done"; sleep 2; exit;;
 	*) clear; Ask2install_Alice1
 esac
 }
@@ -101,12 +83,11 @@ rm Alice1.7z >/dev/null 2>&1
 echo "~~~~~~~~~~~~~~~~~~~"
 echo " Alice 1 Installer"
 echo "~~~~~~~~~~~~~~~~~~~"; echo ""
-echo "[ ### Downloading Alice1.7z from Archive.org.. ### ]"; echo ""; wget -O Alice1Link.txt https://gist.githubusercontent.com/ConzZah/ffd812046e6a7011b334007b7e8a8037/raw >/dev/null 2>&1 && wget -q --show-progress -i Alice1Link.txt
+echo "[ ### Downloading Alice1.7z from Archive.org.. ### ]"; echo ""; wget -O Alice1Link.txt https://gist.githubusercontent.com/ConzZah/ffd812046e6a7011b334007b7e8a8037/raw >/dev/null 2>&1 && wget -q --show-progress -i Alice1Link.txt; echo ""
 echo "[ ### Extracting Alice1.7z into Game Directory.. ### ]"; echo ""; 7z x Alice1.7z -y >/dev/null 2>&1
 echo "[ ### Cleaning up.. ### ]"; rm Alice1.7z; rm Alice1Link.txt; echo ""
 echo "[ ### DONE INSTALLING ALICE 1 ### ]"; echo ""
-echo "$exitmsg"
-sleep 3
+alice1_fullscreen_fix
 }
 # alice1_fullscreen_fix 
 # (applies cfg with option [ seta r_fullscreen "1" ] since the default is 0).
@@ -116,25 +97,25 @@ echo "~~~~~~~~~~~~~~~~~~~~"
 echo "  PATCHING ALICE 1  "
 echo "~~~~~~~~~~~~~~~~~~~~"; echo ""
 mkdir -p "$alice1_cfgpath"; cd "$alice1_cfgpath"; chmod 777 config.cfg >/dev/null 2>&1; cd "$wd"; cd config_files >/dev/null 2>&1
-echo "[ ### Extracting config.cfg ### ]"
+echo "[ ### Extracting config.cfg ### ]"; echo ""
 7z e alice1_config/config.cfg.7z -y -o"$alice1_cfgpath" >/dev/null 2>&1
 7z e alice1_config/config.cfg.7z -y -o"$alice1_gamepath/bin/base" >/dev/null 2>&1
-echo "[ ### Setting config.cfg to read only ### ]"
-cd "$alice1_cfgpath"; chmod 400 config.cfg >/dev/null 2>&1;
-echo ""; echo "[ ### DONE PATCHING ALICE 1 ### ]"; echo ""
-echo "$exitmsg"; echo ""
+echo "[ ### Setting config.cfg to read only ### ]"; echo ""
+cd "$alice1_cfgpath"; chmod 400 config.cfg >/dev/null 2>&1
+echo "[ ### DONE PATCHING ALICE 1 ### ]"; echo ""
+echo "$_done"; echo ""
 echo "[ ~~~ PRESS ANY KEY TO EXIT ~~~ ]"
 read -n 1 -s; exit
 }
 # pre_launch_checks ( loads paths, checks for missing dependencies, etc. )
 function pre_launch_checks {
-_y="-y"
 _doso="sudo"
 wd=$(pwd)
 hd="/home/$USER"
-_install="apt install"
+_install="apt install -y"
+_done="HAVE FUN PLAYING :D"
 hd_fpak="/home/$USER/.var/app/com.valvesoftware.Steam"
-is_alpine=$(uname -v|grep -o -w Alpine); if [[ "$is_alpine" == "Alpine" ]]; then hd=$hd_fpak; _doso="doas"; _install="apk add"; _y=""; fi # <-- sets options for alpine, if detected.
+is_alpine=$(uname -v|grep -o -w Alpine); if [[ "$is_alpine" == "Alpine" ]]; then hd=$hd_fpak; _doso="doas"; _install="apk add"; fi # <-- sets options for alpine, if detected.
 # amr_paths:
 steampath="$hd/.local/share/Steam/steamapps/common/Alice Madness Returns"
 documentspath="$hd/.steam/steam/steamapps/compatdata/19680/pfx/drive_c/users/steamuser/My Documents/My Games"
@@ -146,17 +127,9 @@ aliceengineini_path="$documentspath/Alice Madness Returns/AliceGame/Config"
 alice1_gamepath="$steampath/Alice1"
 alice1_cfgpath="$documentspath/American McGee's Alice"
 ################################################################
-# if dependencies are missing it will install them before launching
-missing_dependency="ERROR MISSING DEPENDENCY:"
-prompt="PRESS ANY KEY TO INSTALL"
-command -v wget >/dev/null 2>&1 || { echo "$missing_dependency WGET"; echo ""; 
-echo "( required for downloading alice 1 )"; echo ""; 
-echo "[ ~~~ $prompt WGET ~~~ ]";
-read -n 1 -s; $_doso $_install $_y wget; }
-command -v 7z >/dev/null 2>&1 || { echo "$missing_dependency 7zip"; echo "";
-echo "( required for extracting config files )"; echo ""; 
-echo "[ ~~~ $prompt 7zip ~~~ ]";
-read -n 1 -s; $_doso $_install $_y 7zip; }
+# if wget or 7zip are missing, it will install them before launching
+(type -p wget >/dev/null || ( $_doso $_install wget ))
+(type -p 7z >/dev/null || ( $_doso $_install 7zip ))
 # ( FAILSAFE ) If no config_files folder is found, will get config_files.7z as raw text file from gist link. base64 is used to decode, and 7z to extract.
 if [ ! -d config_files ]; then
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
