@@ -16,7 +16,7 @@
 
 ## Download:
 
-**( current version: v3.2-1 )**
+**( current version: v3.4 )**
 <p>
   <a href="https://github.com/ConzZah/Alice-Madness-Returns-Patcher_Linux/archive/refs/heads/main.zip">
     <img alt="Download_Latest" src="https://img.shields.io/badge/download-latest_release-0688CB.svg">
